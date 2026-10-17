@@ -99,12 +99,12 @@ API_APP_URL = f"{API_APP_HOST}:{API_APP_PORT}"
 
 # Keycloak configuration
 KC_URL = os.getenv("KC_URL", "https://localhost:8443")
-KC_REALM = os.getenv("KC_REALM", "mail-and-media-shop-realm")
+KC_REALM = os.getenv("KC_REALM", "example-shop-realm")
 if "8444" in KC_URL:
     KC_CLIENT_ID = "storage-service-app"
     KC_CLIENT_SECRET = "2BcfsFrhh6WWwMQMhxfyjweZuLdWmfpr"
 else:
-    KC_CLIENT_ID = "mail-and-media-shop-app"
+    KC_CLIENT_ID = "example-shop-app"
     KC_CLIENT_SECRET = "2BcfsFrhh6WWwMQMhxfyjweZuLdWmfpr"
 KC_GRANT_TYPE = os.getenv("KC_GRANT_TYPE", "password")
 KC_USERNAME = os.getenv("KC_USERNAME", os.getenv("USER_EMAIL", "postman_user2@example.com"))
@@ -442,7 +442,7 @@ def main():
                 test_sso_integration(
                     kc_url=KC_URL,
                     realm=KC_REALM,
-                    client_id="mail-and-media-shop-app",
+                    client_id="example-shop-app",
                     client_secret=KC_CLIENT_SECRET,
                     username=KC_USERNAME,
                     password=KC_PASSWORD,

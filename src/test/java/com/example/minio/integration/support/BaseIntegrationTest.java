@@ -21,6 +21,8 @@ import org.testcontainers.utility.DockerImageName;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
+import java.util.List;
+ 
 /**
  * Base class for integration tests.
  * <p>
@@ -97,7 +99,7 @@ public abstract class BaseIntegrationTest {
         registry.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> issuer);
         registry.add("spring.security.oauth2.resourceserver.jwt.jwk-set-uri",
                 () -> "http://localhost:" + WIREMOCK.port() + "/protocol/openid-connect/certs");
-        registry.add("app.security.audience", () -> "mail-and-media-shop-app");
+        registry.add("app.security.audience", () -> "example-shop-app");
     }
 
     @BeforeEach
@@ -125,7 +127,7 @@ public abstract class BaseIntegrationTest {
         return "Bearer " + JWT_FACTORY.createToken(
                 subject,
                 "http://localhost:" + WIREMOCK.port() + "/realms/test",
-                "mail-and-media-shop-app",
-                java.util.List.of("USER"));
+                "example-shop-app",
+                List.of("USER"));
     }
 }

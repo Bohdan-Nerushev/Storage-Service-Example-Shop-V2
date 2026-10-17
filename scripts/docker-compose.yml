@@ -83,7 +83,7 @@ services:
       KC_URL: "https://keycloak:8443"
       KC_ADMIN_USER: ${KC_BOOTSTRAP_ADMIN_USERNAME:-admin}
       KC_ADMIN_PASS: ${KC_BOOTSTRAP_ADMIN_PASSWORD:-admin}
-      KC_REALM: ${KC_REALM:-mail-and-media-shop-realm}
+      KC_REALM: ${KC_REALM:-example-shop-realm}
       KC_CLIENT_ID: ${KC_CLIENT_ID:-storage-service-app}
       KC_CLIENT_SECRET: ${KC_CLIENT_SECRET:-2BcfsFrhh6WWwMQMhxfyjweZuLdWmfpr}
       KEYCLOAK_DB_USER: ${KEYCLOAK_DB_USER:-keycloak}
@@ -102,4 +102,4 @@ volumes:
 networks:
   monitoring:
     external: true
-    name: ${MONITORING_NETWORK_NAME:-storage-service-mail-and-media-shop-v2_monitoring}
+    name: ${MONITORING_NETWORK_NAME:-storage-service-example-shop-v2_monitoring}

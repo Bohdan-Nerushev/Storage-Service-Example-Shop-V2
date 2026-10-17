@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: storage-service-mail-and-media-shop-v2
+    image: storage-service-example-shop-v2
     ports:
       - "8080:8080"
     environment:
@@ -20,7 +20,7 @@ services:
       AVATAR_MAX_REQUEST_SIZE: ${AVATAR_MAX_REQUEST_SIZE:-5MB}
       JDK_JAVA_OPTIONS: "-Djavax.net.ssl.trustStore=/app/certs/truststore.jks -Djavax.net.ssl.trustStorePassword=${TRUSTSTORE_PASSWORD}"
     volumes:
-      - ${TRUSTSTORE_PATH:-../API-mail-and-media-shop-v2/certs/truststore.jks}:/app/certs/truststore.jks:ro
+      - ${TRUSTSTORE_PATH:-../API-example-shop-v2/certs/truststore.jks}:/app/certs/truststore.jks:ro
     depends_on:
       postgres:
         condition: service_healthy
@@ -81,4 +81,5 @@ volumes:
 networks:
   monitoring:
     external: true
-    name: ${MONITORING_NETWORK_NAME:-api-mail-and-media-shop-v2_monitoring}
+    name: ${MONITORING_NETWORK_NAME:-api-example-shop-v2_monitoring}
+

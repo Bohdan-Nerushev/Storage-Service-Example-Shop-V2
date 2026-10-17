@@ -29,7 +29,7 @@ fi
 
 # Apply script-level defaults if they are still empty
 GITLAB_URL="${GITLAB_URL:-https://git.mam.dev}"
-PROJECT_PATH="${PROJECT_PATH:-bnerushev%2Fmail-and-media-shop-v2}"
+PROJECT_PATH="${PROJECT_PATH:-bnerushev%2Fexample-shop-v2}"
 
 if [ -z "$GITLAB_TOKEN" ]; then
     echo "ERROR: GITLAB_TOKEN is not set in environment and not found in $ENV_FILE."

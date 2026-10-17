@@ -20,7 +20,7 @@ Only JPEG, PNG, and WebP signatures are accepted. The default size limit is 5 MB
 Set these variables in `.env` before running Docker Compose:
 
 ```dotenv
-KC_ISSUER_URI=https://localhost:8443/realms/mail-and-media-shop-realm
+KC_ISSUER_URI=https://localhost:8443/realms/example-shop-realm
 KC_CLIENT_ID=storage-service-app
 FRONTEND_ORIGIN=http://localhost:5173
 ```
@@ -80,7 +80,7 @@ Before running E2E tests, ensure:
    
    # Keycloak
    KC_URL=https://localhost:8443
-   KC_REALM=mail-and-media-shop-realm
+   KC_REALM=example-shop-realm
    KC_CLIENT_ID=storage-service-app
    KC_CLIENT_SECRET=
    KC_ADMIN_USER=
@@ -165,7 +165,7 @@ GITLAB_TOKEN=your_personal_access_token ./scripts/upload_gitlab_variables.sh
 ### Features
 * **Dynamic `.env` Parsing**: Automatically reads all non-empty key-value pairs from `.env` (skipping comments and empty lines).
 * **Idempotent Execution**: Attempts to create each variable (`POST`). If the variable already exists in GitLab, it updates its value (`PUT`).
-* **Environment Overrides**: Supports overriding `GITLAB_URL` (default: `https://git.mam.dev`) and `PROJECT_PATH` (default: `bnerushev%2Fstorage-service-mail-and-media-shop-v2`).
+* **Environment Overrides**: Supports overriding `GITLAB_URL` (default: `https://git.mam.dev`) and `PROJECT_PATH` (default: `bnerushev%2Fstorage-service-example-shop-v2`).
 
 ---
 
