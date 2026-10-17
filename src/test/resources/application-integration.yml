@@ -33,5 +33,5 @@ spring:
 
 app:
   security:
-    audience: mail-and-media-shop-app
+    audience: example-shop-app
     allowed-origin: http://localhost:5173

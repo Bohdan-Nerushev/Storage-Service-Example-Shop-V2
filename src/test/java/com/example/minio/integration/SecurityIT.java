@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,7 +54,7 @@ class SecurityIT extends BaseIntegrationTest {
     void expiredTokenIsRejected() throws Exception {
         final String issuer = "http://localhost:" + WIREMOCK.port() + "/realms/test";
         final String expiredToken = "Bearer " + JWT_FACTORY.createExpiredToken(
-                "expired-user", issuer, "mail-and-media-shop-app");
+                "expired-user", issuer, "example-shop-app");
 
         mockMvc.perform(get("/api/v1/avatars/me")
                         .header(HttpHeaders.AUTHORIZATION, expiredToken))
@@ -64,7 +66,7 @@ class SecurityIT extends BaseIntegrationTest {
     void wrongAudienceTokenIsRejected() throws Exception {
         final String issuer = "http://localhost:" + WIREMOCK.port() + "/realms/test";
         final String wrongAudienceToken = "Bearer " + JWT_FACTORY.createToken(
-                "some-user", issuer, "completely-different-audience", java.util.List.of("USER"));
+                "some-user", issuer, "completely-different-audience", List.of("USER"));
 
         mockMvc.perform(get("/api/v1/avatars/me")
                         .header(HttpHeaders.AUTHORIZATION, wrongAudienceToken))
@@ -76,7 +78,7 @@ class SecurityIT extends BaseIntegrationTest {
     void missingUserRoleIsRejected() throws Exception {
         final String issuer = "http://localhost:" + WIREMOCK.port() + "/realms/test";
         final String noRoleToken = "Bearer " + JWT_FACTORY.createToken(
-                "role-less-user", issuer, "mail-and-media-shop-app", java.util.List.of());
+                "role-less-user", issuer, "example-shop-app", List.of());
 
         mockMvc.perform(get("/api/v1/avatars/me")
                         .header(HttpHeaders.AUTHORIZATION, noRoleToken))

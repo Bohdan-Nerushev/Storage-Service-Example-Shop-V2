@@ -3,7 +3,7 @@ set -eo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/env_loader.sh"
 export IMAGE_TAG="${IMAGE_TAG:-$(git rev-parse --short HEAD 2>/dev/null || echo "latest")}"
-$SSH_CMD "rm -rf ~/mam-deployments/mail-and-media-shop"
+$SSH_CMD "rm -rf ~/mam-deployments/example-shop"
 docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" .
 docker save -o "${IMAGE_NAME}-${IMAGE_TAG}.tar" "${IMAGE_NAME}:${IMAGE_TAG}"
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" "${IMAGE_NAME}-${IMAGE_TAG}.tar" "${SSH_USER}@${SSH_HOST}:~/"

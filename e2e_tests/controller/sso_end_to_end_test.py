@@ -21,16 +21,16 @@ def check_sso_docker_containers() -> bool:
         output = result.stdout.lower()
         
         # Check storage-service containers
-        has_storage_app = any("storage-service-mail-and-media-shop-v2-app" in line or ("storage-service-mail-and-media-shop-v2" in line and "app" in line) for line in output.splitlines())
-        has_storage_postgres = "storage-service-mail-and-media-shop-v2-postgres" in output
-        has_storage_minio = "storage-service-mail-and-media-shop-v2-minio" in output
+        has_storage_app = any("storage-service-example-shop-v2-app" in line or "storage-service-mail-and-media-shop-v2-app" in line or (("storage-service-example-shop-v2" in line or "storage-service-mail-and-media-shop-v2" in line) and "app" in line) for line in output.splitlines())
+        has_storage_postgres = "storage-service-example-shop-v2-postgres" in output or "storage-service-mail-and-media-shop-v2-postgres" in output
+        has_storage_minio = "storage-service-example-shop-v2-minio" in output or "storage-service-mail-and-media-shop-v2-minio" in output
         
         # Check API containers
         has_keycloak_db = "keycloak-db" in output
         has_keycloak = any(line.split()[0] == "keycloak" or ("keycloak" in line and "setup" not in line and "db" not in line) for line in output.splitlines() if line)
         has_shop_db = "shop-db" in output
         has_shop_redis = "shop-redis" in output
-        has_api_app = "mail_and_media_shop_v2" in output or "api-mail-and-media-shop-v2" in output
+        has_api_app = "example_shop_v2" in output or "api-example-shop-v2" in output or "mail_and_media_shop_v2" in output or "api-mail-and-media-shop-v2" in output
         
         required_containers = {
             "storage_app": has_storage_app,
@@ -103,7 +103,7 @@ def test_sso_integration(
         logger.info(f"Testing access token against Storage Service at {storage_url}...")
         storage_response = requests.get(f"{storage_url.rstrip('/')}/api/v1/avatars/me", headers=headers, verify=False, timeout=10)
 
-        # 4. Test token against with API mail and madia shop (SSO)
+        # 4. Test token against Example Shop API (SSO)
         api_response = requests.get(f"{api_url.rstrip('/')}/api/v1/shop/customers/me", headers=headers, verify=False, timeout=10)
         assert api_response.status_code in [200, 404], f"Main API auth failed with status code: {api_response.status_code}"
         logger.info("Main API successfully validated token (SSO verification PASSED).")

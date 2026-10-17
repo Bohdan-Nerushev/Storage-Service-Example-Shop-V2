@@ -20,7 +20,7 @@ KC_URL=${KC_URL:-"https://localhost:8443"}
 ADMIN_USER=${KC_ADMIN_USER:-"admin"}
 ADMIN_PASS=${KC_ADMIN_PASS:-"admin"}
 
-REALM=${KC_REALM:-"mail-and-media-shop-realm"}
+REALM=${KC_REALM:-"example-shop-realm"}
 CLIENT_ID=${KC_CLIENT_ID:-"storage-service-app"}
 CLIENT_SECRET=${KC_CLIENT_SECRET:-""}
 

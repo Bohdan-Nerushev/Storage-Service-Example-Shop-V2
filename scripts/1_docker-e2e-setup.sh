@@ -104,7 +104,7 @@ fi
 # ==============================================================================
 
 # Ensure monitoring network exists for standalone E2E testing
-export MONITORING_NETWORK_NAME="storage-service-mail-and-media-shop-v2_monitoring"
+export MONITORING_NETWORK_NAME="storage-service-example-shop-v2_monitoring"
 log_info "Ensuring monitoring network '$MONITORING_NETWORK_NAME' exists..."
 docker network inspect "$MONITORING_NETWORK_NAME" &>/dev/null || docker network create "$MONITORING_NETWORK_NAME"
 
@@ -193,7 +193,7 @@ wait_for_service_healthy "$PROJECT_ROOT/docker-compose.yml" "postgres"
 wait_for_service_healthy "$PROJECT_ROOT/docker-compose.yml" "minio"
 
 log_info "Building and starting application (forcing E2E Keycloak issuer port 8444)..."
-export KC_ISSUER_URI="https://localhost:8444/realms/mail-and-media-shop-realm"
+export KC_ISSUER_URI="https://localhost:8444/realms/example-shop-realm"
 docker compose -f "$PROJECT_ROOT/docker-compose.yml" up -d --build app || error_exit "Docker Compose app start failed."
 
 # Wait for application to be healthy
